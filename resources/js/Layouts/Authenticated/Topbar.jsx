@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
+import { Link } from "@inertiajs/react";
 
-export default function Topbar() {
+export default function Topbar({ name }) {
     const [openDropdown, setOpenDropdown] = useState(true);
     const dropdownRef = useRef(null);
 
-    const handleDropdownClick = () => {
+    const handleDropdownClick = ({ name }) => {
         if (openDropdown) {
             dropdownRef.current.classList.remove("hidden");
         } else {
@@ -22,7 +23,7 @@ export default function Topbar() {
             />
             <div className="flex items-center gap-4">
                 <span className="text-black text-sm font-medium">
-                    Welcome, Granola Sky
+                    Welcome, {name}
                 </span>
                 <div className="collapsible-dropdown flex flex-col gap-2 relative">
                     <div
@@ -51,12 +52,13 @@ export default function Topbar() {
                         >
                             Settings
                         </a>
-                        <a
-                            href="sign_in.html"
+                        <Link
+                            href={route("logout")}
+                            method="post"
                             className="transition-all hover:bg-sky-100 p-4"
                         >
                             Sign Out
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

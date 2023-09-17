@@ -1,10 +1,10 @@
 import Flickity from "react-flickity-component";
 import { Head } from "@inertiajs/react";
-import Authenticated from "@/Layouts/Authenticated/Index";
+import Authenticated from "@/Layouts/Authenticated";
 import FeaturedMovie from "@/Components/FeaturedMovie";
 import MovieCard from "@/Components/MovieCard";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, featuredMovies, movies }) {
     const flickityOptions = {
         cellAlign: "left",
         contain: true,
@@ -30,14 +30,14 @@ export default function Dashboard({ auth }) {
                 </div>
                 <Flickity classNameName="gap-[30px]" options={flickityOptions}>
                     {/* Movie Thumbnail */}
-                    {[1, 2, 3, 4].map((i) => (
+                    {featuredMovies.map((featuredMovie) => (
                         <FeaturedMovie
-                            key={i}
-                            slug="the-batman-in-love"
-                            name={`The Batman in love ${i}`}
-                            category="Comedy"
-                            thumbnail="/images/featured-1.png"
-                            rating={i + 1}
+                            key={featuredMovie.id}
+                            slug={featuredMovie.slug}
+                            name={featuredMovie.name}
+                            category={featuredMovie.category}
+                            thumbnail={featuredMovie.thumbnail}
+                            rating={featuredMovie.rating}
                         />
                     ))}
                 </Flickity>
@@ -47,13 +47,13 @@ export default function Dashboard({ auth }) {
                     Browse
                 </div>
                 <Flickity className="gap-[30px]" options={flickityOptions}>
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
+                    {movies.map((movie) => (
                         <MovieCard
-                            key={i}
-                            slug="the-golden-meow"
-                            name={`The Golden Meow ${i}`}
-                            category="Comedy"
-                            thumbnail="/images/browse-1.png"
+                            key={movie.id}
+                            slug={movie.slug}
+                            name={movie.name}
+                            category={movie.category}
+                            thumbnail={movie.thumbnail}
                         />
                     ))}
                 </Flickity>
